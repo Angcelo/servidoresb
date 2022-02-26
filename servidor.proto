@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package grpc;
 
-option go_package = "github.com/Angcelo/protossa/protocliente";
+option go_package = "github.com/Angcelo/servidoresb";
 
 message idRequest {
-    int32 Id = 1;
+    int32 id = 1;
 } 
 
 message Vacio {
@@ -13,41 +13,37 @@ message Vacio {
 }
 
 message ClienteRequest {
-    repeated ProducoRequest Producto = 1;
+    repeated ProducoRequest producto = 1;
 }
 
 message ProducoRequest {
-    string Nombre = 1;
-    int32 Cantidad = 2;
+    string nombre = 1;
+    int32 cantidad = 2;
 }
 
 message GeneralResponse {
-    string Mensaje = 1;
+    string mensaje = 1;
 }
 
 message ListaPedidosReponse {
-    repeated PedidoReqRes Pedidos = 1;
+    repeated PedidoReqRes pedidos = 1;
 }
 
 message PedidoReqRes {
     int32 id = 1;
-    repeated ProducoRequest Producto = 2;
+    repeated ProducoRequest producto = 2;
 }
 
 service ClienteService {
-    rpc crearPedido(ClienteRequest) returns (GeneralResponse);
+    rpc CrearPedido(ClienteRequest) returns (GeneralResponse);
     rpc GetPedidos(Vacio) returns (ListaPedidosReponse);
     rpc GetEstadoRestaurant(idRequest) returns (GeneralResponse);
     rpc GetEstadoReparto(idRequest) returns (GeneralResponse);
 
-    rpc AceptarPedido(PedidoReqRes) returns (GeneralResponse);
     rpc GetPedidosRest(Vacio) returns (ListaPedidosReponse);
     rpc EnviarEncargo(idRequest) returns (GeneralResponse);
-    rpc SendEstadoRestaurant(idRequest) returns (GeneralResponse);
 
-    rpc crearReparto(PedidoReqRes) returns (GeneralResponse);
     rpc GetPedidosReparto(Vacio) returns (ListaPedidosReponse);
     rpc TerminarEncargo(idRequest) returns (GeneralResponse);
-    rpc SendEstadoReparto(idRequest) returns (GeneralResponse);
 
 }
